@@ -11,13 +11,13 @@ rem  == Configuration ==
 rem  = Required =
 
 rem - Overviewer folder Location
-set PIGMAP=C:\path\to\Drakonas-Pigmap
+set PIGMAP=C:\Users\Drakonas\Downloads\Minecraft\Drakonas-pigmap
 
 rem - World directory
-set WORLD=C:\path\to\world
+set WORLD=C:\Users\Drakonas\AppData\Roaming\.minecraft\saves\World1
 
 rem - Map output directory
-set OUTPUT=C:\path\to\output\directory
+set OUTPUT=C:\Users\Drakonas\Downloads\Minecraft\Drakonas-pigmap\tiles
 
 rem - Base Zoom level block size (in pixels)
 rem - (Just leave as default if you don't know what to do with this)
@@ -47,7 +47,11 @@ set THREADS=1
 
 rem - Finish Configuration
 
+rem Setup environment
 
+C:
+chdir C:\cygwin\bin
+set CYGWIN=nodosfilewarning
 
 rem Check for existing paths
 
