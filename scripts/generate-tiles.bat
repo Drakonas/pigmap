@@ -88,7 +88,7 @@ if not exist "%TEXTURE%\terrain.png" (
 
 echo Copying needed folders
 xcopy /s/e/y "%PIGMAP%\web_assets\*" "%OUTPUT%"
-copy "%PIGMAP%/template.html" "%OUTPUT%/index.html"
+xcopy /y "%PIGMAP%\template.html" "%OUTPUT%\index.html"
 
 echo Generating map...
 "%PIGMAP%\pigmap" -B "%BASEZOOM%" -T "%TILEMULTI%" -g "%TEXTURE%" -h "%THREADS%" -i "%WORLD%" -o "%OUTPUT%" >> "%LOGFILE%"
