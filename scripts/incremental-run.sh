@@ -6,16 +6,17 @@
 
 ## Default config
 
-MCHOME=/opt/bukkit # Root MC directory (directory with server jar)
+MCHOME=/path/to/minecraft # Root MC directory (directory with server jar)
 PIGMAP=$MCHOME/pigmap # Location of Pigmap
-WORLD=SurvivalWorld # Name of world, located in $MCHOME
-OUTPUT=$PIGMAP/tiles
+WORLD=world # Name of world, located in $MCHOME
+OUTPUT=$PIGMAP/tiles # You need to create this directory
 
 # Path to terrain.png and fire.png, etc. (all images)
 # NOTICE!!: Place terrain.png from a texture pack or from minecraft.jar in terrain/.
 # I recommend Painterly Pack with the lighter, custom water texture for best experience
 TEXTURE=$PIGMAP/terrain
 
+# You need to create the $MCHOME/logs directory
 LOGPATH=$MCHOME/logs/pigmap/$(date +%Y%m%d-%H%M).log
 
 CHUNKLIST=$LOGPATH.rsync
