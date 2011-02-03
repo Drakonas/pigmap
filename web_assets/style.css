@@ -1,6 +1,6 @@
 html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px ; background-color: #000; }
-#mcmap { height: 100% }
+#mcmap { height: 100%l background-color: black}
 
 .infoWindow {
     height: 100px;
