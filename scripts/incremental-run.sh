@@ -9,14 +9,14 @@
 MCHOME=/path/to/minecraft # Root MC directory (directory with server jar)
 PIGMAP=$MCHOME/pigmap # Location of Pigmap
 WORLD=world # Name of world, located in $MCHOME
-OUTPUT=$PIGMAP/tiles # You need to create this directory
+OUTPUT=$PIGMAP/tiles
+SCRIPTS=$PIGMAP # Location of template.html and style.css
 
 # Path to terrain.png and fire.png, etc. (all images)
 # NOTICE!!: Place terrain.png from a texture pack or from minecraft.jar in terrain/.
 # I recommend Painterly Pack with the lighter, custom water texture for best experience
 TEXTURE=$PIGMAP/terrain
 
-# You need to create the $MCHOME/logs directory
 LOGPATH=$MCHOME/logs/pigmap/$(date +%Y%m%d-%H%M).log
 
 CHUNKLIST=$LOGPATH.rsync
@@ -71,20 +71,19 @@ echo "Copying needed files and folders at: $(date +%s)" >> $LOGPATH
 echo "cp $PIGMAP/web_assets/* $OUTPUT -R" >> $LOGPATH
 echo "Copying needed files and folders..."
 cp $PIGMAP/web_assets/* $OUTPUT -R
-cp $PIGMAP/template.html $OUTPUT/index.html
 
 # Run incremental update
 if [ -f $OUTPUT/pigmap.params ]
 then
     echo "Start incremental update at: $(date +%s)" >> $LOGPATH
-    echo "$PIGMAP/pigmap -i $RSYNCWORLD -o $OUTPUT -g $TEXTURE -h $THREADS -c $CHUNKLIST" >> $LOGPATH
+    echo "$PIGMAP/pigmap -i $RSYNCWORLD -o $OUTPUT -g $TEXTURE -h $THREADS -m $SCRIPTS -c $CHUNKLIST" >> $LOGPATH
     echo "Starting incremental generation..."
-    $PIGMAP/pigmap -i $RSYNCWORLD -o $OUTPUT -g $TEXTURE -h $THREADS -c $CHUNKLIST
+    $PIGMAP/pigmap -i $RSYNCWORLD -o $OUTPUT -g $TEXTURE -h $THREADS -m $SCRIPTS -c $CHUNKLIST
 else
     echo "Start initial generation at: $(date +%s)" >> $LOGPATH
-    echo "$PIGMAP/pigmap -B $BASEZOOM -T $TILEMULTI -i $RSYNCWORLD -o $OUTPUT -g $TEXTURE -h $THREADS" >> $LOGPATH
+    echo "$PIGMAP/pigmap -B $BASEZOOM -T $TILEMULTI -i $RSYNCWORLD -o $OUTPUT -m $SCRIPTS -g $TEXTURE -h $THREADS" >> $LOGPATH
     echo "Starting initial generation..."
-    $PIGMAP/pigmap -B $BASEZOOM -T $TILEMULTI -i $RSYNCWORLD -o $OUTPUT -g $TEXTURE -h $THREADS
+    $PIGMAP/pigmap -B $BASEZOOM -T $TILEMULTI -i $RSYNCWORLD -o $OUTPUT -m $SCRIPTS -g $TEXTURE -h $THREADS
 fi
 if [ $? -ne 0 ]; then
    echo "pigmap returned error";

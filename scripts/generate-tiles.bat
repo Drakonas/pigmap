@@ -19,6 +19,9 @@ set WORLD=C:\Users\Drakonas\AppData\Roaming\.minecraft\saves\World1
 rem - Map output directory
 set OUTPUT=C:\Users\Drakonas\Downloads\Minecraft\Drakonas-pigmap\tiles
 
+rem - index.html and style.css directory
+set SCRIPTS=%PIGMAP%
+
 rem - Base Zoom level block size (in pixels)
 rem - (Just leave as default if you don't know what to do with this)
 set BASEZOOM=6
@@ -88,10 +91,9 @@ if not exist "%TEXTURE%\terrain.png" (
 
 echo Copying needed folders
 xcopy /s/e/y "%PIGMAP%\web_assets\*" "%OUTPUT%"
-xcopy /y "%PIGMAP%\template.html" "%OUTPUT%\index.html"
 
 echo Generating map...
-"%PIGMAP%\pigmap" -B "%BASEZOOM%" -T "%TILEMULTI%" -g "%TEXTURE%" -h "%THREADS%" -i "%WORLD%" -o "%OUTPUT%" >> "%LOGFILE%"
+"%PIGMAP%\pigmap" -B "%BASEZOOM%" -T "%TILEMULTI%" -g "%TEXTURE%" -h "%THREADS%" -m "%SCRIPTS%" -i "%WORLD%" -o "%OUTPUT%" >> "%LOGFILE%"
 
 echo Finished Generating
 pause
